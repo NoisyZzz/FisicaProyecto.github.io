@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="query.js"></script>
+
+    <link rel="stylesheet" href="estilos.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Oro</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a class="NavImage" href="Oro.html">Calcular Oro</a></li>
+            <li><a class="NavImage" href="Plata.html">Calcular Plata</a></li>
+            <li><a class="NavImage" href="cobre.html">Calcular Cobre</a></li>
+            <li><a class="NavImage" href="Diamante.html">Calcular Diamante</a></li>
+        </ul>
+    </nav>
+    <h3>Calcular Oro</h3>
+    <form>
+        <div>
+            <label>Masa:</label>
+            <input type="text" id="txtmasa"/>
+            <label id="errorMasa"></label>
+        </div>
+        
+        <div>
+            <label>Volumen (cm3): </label>
+            <input id="txtvolumen" type="text"/>
+            <label id="errorVolumen"></label>
+        </div>
+        
+        <div>
+            <button type="button" id="btnenviar">Enviar</button>
+        </div>
+        <div>
+            <label id="txtRespuesta"></label>
+        </div>
+
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#btnenviar").on("click",function(){
+                var masa =$("#txtmasa").val();
+                var volumen =$("#txtvolumen").val();
+                var error = false;
+                var densidadOroPuro = 19.32;
+
+                $("#errorMasa").text("");
+                $("#errorVolumen").text("");
+                $("#txtRespuesta").text("");
+
+                if(isNaN(masa) || masa <= 0 ){
+                    $("#errorMasa").text("Valor no válido.");
+                    error=true;
+                }
+                if(isNaN(volumen) || volumen <=0){
+                    $("#errorVolumen").text("Valor no válido.");
+                    erro=true;
+                }
+                if(!error){
+                    var densidad = masa/volumen;
+                    
+                    if(Math.abs(densidad - densidadOroPuro) <=0.1){
+                        $("#txtRespuesta").text("Es genuino.");
+                    }else{
+                        $("#txtRespuesta").text("No es genuino.");
+                    }
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
